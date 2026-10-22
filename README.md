@@ -61,30 +61,32 @@ flowchart TD
 
 ---
 
-### 🚀 Schnellstart
+### 🚀 Schnellstart & Installation
 
 #### Voraussetzungen
 - Node.js 20+ (LTS)
 
-#### Installation & Start
+#### 1. Repository klonen & Abhängigkeiten installieren
 ```powershell
-# 1. Klonen & Abhängigkeiten installieren
 git clone https://github.com/Tom7668h/edge-commerce-sync.git
 cd edge-commerce-sync
 npm install
+```
 
-# 2. Lokalen Server starten (Dashboard auf Port 8787)
+#### 2. Lokalen Server starten (Dashboard auf Port 8787)
+```powershell
 npm start
+```
+Dashboard im Browser öffnen: 👉 **http://localhost:8787**
 
-# 3. Tests ausführen
+#### 3. Automatisierte Tests ausführen
+```powershell
 npm test
 ```
 
-Dashboard im Browser: 👉 **http://localhost:8787**
-
 ---
 
-### 🧪 Tests
+### 🧪 Test-Verifikation
 ```powershell
 npm test
 ```
@@ -100,13 +102,16 @@ npm test
 
 ---
 
+### 📄 Lizenz
+MIT-Lizenz. Erstellt von [Tom7668h](https://github.com/Tom7668h).
+
 <br><br>
 
 ---
 
 ## 🇬🇧 English Documentation
 
-An ultra-low-latency, edge-first **Catalog Ingestion & Dynamic Price Intelligence Hub** engineered for enterprise automotive (commercial vehicle / NFZ) and industrial wholesale. Built with **Cloudflare Workers**, **Hono**, **Cloudflare D1 / SQLite**, **Tailwind CSS**, and **Alpine.js**.
+An ultra-low-latency, edge-first **Catalog Ingestion & Dynamic Price Intelligence Hub** engineered for enterprise automotive (commercial vehicle / NFZ) and industrial wholesale. Built with **Cloudflare Workers Edge Runtime**, **Hono**, **Cloudflare D1 / SQLite**, **Tailwind CSS**, and **Alpine.js**.
 
 ---
 
@@ -121,21 +126,78 @@ This hub offloads catalog processing directly to the global network edge:
 2. **Automated Brand Mapping:** Rule-based regex translation converts generic supplier names (`GENERIC_HD`, `AFTERMARKET_LINE`) into high-margin private labels (`ApexTruck Pro`, `OmniCraft Fleet`).
 3. **Dynamic 4-Tier Pricing Engine:** Margins are calculated dynamically based on purchase price tiers, category handling surcharges, and psychological rounding rules (`*.99 €`).
 4. **Audit Trail & Anomaly Detection:** Any price shift $\ge 15\%$ is flagged and recorded into an immutable audit trail to eliminate margin erosion.
-5. **Interactive Edge Dashboard:** Zero-build Dark-Mode Web UI with a 1-click feed simulator (50 commercial vehicle parts) and live KPI telemetry.
+5. **Interactive Edge Dashboard:** Reactive Dark-Mode Web UI with a 1-click feed simulator (50 commercial vehicle parts) and live KPI telemetry.
 
 ---
 
-### 🚀 Quickstart
+### 🏗️ Architecture & Workflow
 
+```mermaid
+flowchart TD
+    Supplier["Supplier Catalogs (CSV / JSON)"] --> Ingestion["Zero-Latency Ingest Endpoint (/api/ingest)"]
+    Ingestion --> Validator["EAN-13 & Schema Validator"]
+    Validator --> BrandEngine["Brand Mapping Regex Engine"]
+    BrandEngine --> PriceEngine["4-Tier Margin & Rounding Engine"]
+    PriceEngine --> AnomalyCheck{"Price Delta >= 15%?"}
+    AnomalyCheck -->|Yes| AuditLog[("Price Audit Log")]
+    AnomalyCheck -->|No / Logged| D1Database[("Cloudflare D1 / SQLite DB")]
+    D1Database --> EdgeAPI["Hono REST API (/api/catalog)"]
+    EdgeAPI --> Dashboard["Glassmorphism Web Dashboard"]
+```
+
+---
+
+### 📊 Dynamic Pricing & Margin Model
+
+| Purchase Price Tier (€) | Base Margin (%) | Handling Fee (€) | Rounding Mode | Target Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **0.00 € – 19.99 €** | `55.0 %` | `+ 2.50 €` | Psychological (`*.99 €`) | Consumables, O-Rings, Fasteners |
+| **20.00 € – 99.99 €** | `35.0 %` | `+ 4.00 €` | Psychological (`*.99 €`) | Filters, Valves, Brake Pads |
+| **100.00 € – 499.99 €** | `22.0 %` | `+ 8.00 €` | Psychological (`*.99 €`) | Brake Discs, Sensors, Starters |
+| **500.00 € +** | `15.0 %` | `+ 15.00 €` | Psychological (`*.99 €`) | Retarders, Compressors, Engines |
+
+---
+
+### 🚀 Quickstart & Installation
+
+#### Prerequisites
+- Node.js 20+ (LTS)
+
+#### 1. Clone Repository & Install Dependencies
 ```bash
 git clone https://github.com/Tom7668h/edge-commerce-sync.git
 cd edge-commerce-sync
 npm install
+```
+
+#### 2. Start Local Server (Dashboard on port 8787)
+```bash
 npm start
 ```
-Open **http://localhost:8787**
+Open dashboard in browser: 👉 **http://localhost:8787**
+
+#### 3. Run Automated Tests
+```bash
+npm test
+```
+
+---
+
+### 🧪 Test Verification
+```bash
+npm test
+```
+```text
+ ✓ tests/unit/pricing.service.test.ts   (8 tests)
+ ✓ tests/unit/brand-mapping.test.ts     (6 tests)
+ ✓ tests/unit/validator.test.ts         (6 tests)
+ ✓ tests/integration/catalog-api.test.ts(6 tests)
+
+ Test Files  4 passed (4)
+      Tests  26 passed (26)
+```
 
 ---
 
 ### 📄 License
-MIT © Tom7668h
+MIT License. Created by [Tom7668h](https://github.com/Tom7668h).
