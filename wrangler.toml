@@ -1,0 +1,12 @@
+name = "edge-commerce-sync"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENVIRONMENT = "production"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "catalog-db"
+database_id = "local-d1-catalog-db"

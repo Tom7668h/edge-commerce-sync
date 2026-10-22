@@ -1,0 +1,51 @@
+SKU;EAN;Title;Brand;Category;PurchasePrice;Stock;SupplierName
+NFZ-BR-1001;4012345000018;Bremsscheibe belüftet 430mm Vorderachse;OE-ERSATZ-PRO;Bremsanlage;89.50;34;EuroTruck Logistics
+NFZ-BR-1002;4012345000025;Bremsbelagsatz Schwerlast WVA 29174;AFTERMARKET-LINE;Bremsanlage;42.80;120;EuroTruck Logistics
+NFZ-BR-1003;4012345000032;Bremssattel Knorr SN7000 links;Knorr-Bremse;Bremsanlage;245.00;12;Bremssysteme Süd
+NFZ-BR-1004;4012345000049;Bremssattel Knorr SN7000 rechts;Knorr-Bremse;Bremsanlage;245.00;14;Bremssysteme Süd
+NFZ-BR-1005;4012345000056;Bremstrommel 410x180mm Hinterachse;GENERIC_HD;Bremsanlage;115.00;18;Global Parts Direct
+NFZ-SN-2001;4012345000063;NOx-Sensor nach Katalysator 24V Euro 6;Continental;Sensorik;285.00;25;Sensortechnik Nord
+NFZ-SN-2002;4012345000070;NOx-Sensor vor Katalysator 24V Euro 6;Continental;Sensorik;295.00;20;Sensortechnik Nord
+NFZ-SN-2003;4012345000087;Raddrehzahlsensor ABS/EBS 1800mm;GENERIC_HD;Sensorik;18.40;85;Global Parts Direct
+NFZ-SN-2004;4012345000094;Drucksensor Ansaugluft LKW;Bosch;Sensorik;32.50;45;Bosch Rexroth Partner
+NFZ-SN-2005;4012345000100;Abgastemperatursensor DPF Eingang;AFTERMARKET-LINE;Sensorik;64.00;30;EuroTruck Logistics
+NFZ-PN-3001;4012345000117;EBS-Achskompaktmodul 2-Kanal 24V;Wabco;Druckluft;410.00;8;Wabco Premium Parts
+NFZ-PN-3002;4012345000124;Lufttrocknerkartusche M39x1.5 Coalescing;OE-ERSATZ-PRO;Druckluft;28.90;150;EuroTruck Logistics
+NFZ-PN-3003;4012345000131;Vierkreisschutzventil pneumatisch;GENERIC_HD;Druckluft;95.00;22;Global Parts Direct
+NFZ-PN-3004;4012345000148;Relaisventil Anhängersteuerung;Wabco;Druckluft;78.50;40;Wabco Premium Parts
+NFZ-PN-3005;4012345000155;Luftfederbalg komplett mit Kolben Hinterachse;ContiTech;Fahrwerk;68.00;55;Continental Distribution
+NFZ-PN-3006;4012345000162;Stoßdämpfer Vorderachse verstärkt;Sachs;Fahrwerk;125.00;32;ZF Aftermarket AG
+NFZ-PN-3007;4012345000179;Spurstange verstellbar L=1650mm;Lemförder;Lenkung;145.00;16;ZF Aftermarket AG
+NFZ-PN-3008;4012345000186;Lenkschubstange MAN TGX;AFTERMARKET-LINE;Lenkung;98.00;14;EuroTruck Logistics
+NFZ-FL-4001;4012345000193;Kraftstofffilter Vorfilter mit Wasserabscheider;Mann-Filter;Filtertechnik;19.80;90;Filterunion GmbH
+NFZ-FL-4002;4012345000209;Ölfiltereinsatz LongLife Synthetik;Mann-Filter;Filtertechnik;14.50;210;Filterunion GmbH
+NFZ-FL-4003;4012345000216;Luftfilter Hauptelement 465mm;AFTERMARKET-LINE;Filtertechnik;36.00;65;EuroTruck Logistics
+NFZ-FL-4004;4012345000223;Innenraumfilter Aktivkohle Set;GENERIC_HD;Filtertechnik;12.90;80;Global Parts Direct
+NFZ-FL-4005;4012345000230;AdBlue Filterset mit Dichtungen;OE-ERSATZ-PRO;Filtertechnik;16.40;110;EuroTruck Logistics
+NFZ-EL-5001;4012345000247;Lichtmaschine 28V 100A Schwerlast;Bosch;Elektrik;320.00;10;Bosch Rexroth Partner
+NFZ-EL-5002;4012345000254;Starter Anlasser 24V 6.2kW Actros;Bosch;Elektrik;385.00;9;Bosch Rexroth Partner
+NFZ-EL-5003;4012345000261;LED-Rückleuchte 7-Kammer links mit Kennzeichenl.;Hella;Beleuchtung;88.00;28;Hella Distribution
+NFZ-EL-5004;4012345000278;LED-Rückleuchte 7-Kammer rechts Rückfahrsummer;Hella;Beleuchtung;92.00;26;Hella Distribution
+NFZ-EL-5005;4012345000285;Hauptscheinwerfer H7/LED Tagfahrlicht links;AFTERMARKET-LINE;Beleuchtung;175.00;15;EuroTruck Logistics
+NFZ-EL-5006;4012345000292;Arbeitsscheinwerfer LED Oval 3000 Lumen;GENERIC_HD;Beleuchtung;24.90;70;Global Parts Direct
+NFZ-MO-6001;4012345000308;Common-Rail Injektor CRIN4;Bosch;Motor;480.00;16;Bosch Rexroth Partner
+NFZ-MO-6002;4012345000315;Hochdruckpumpe CP4 2400 bar;Bosch;Motor;890.00;5;Bosch Rexroth Partner
+NFZ-MO-6003;4012345000322;Turbolader VTG wassergekühlt;Garrett;Motor;1150.00;4;Garrett Motion Sales
+NFZ-MO-6004;4012345000339;Wasserpumpe mit Viscolüfterkupplung;OE-ERSATZ-PRO;Kühlung;215.00;14;EuroTruck Logistics
+NFZ-MO-6005;4012345000346;Thermostat 82 Grad Celsius;GENERIC_HD;Kühlung;15.80;95;Global Parts Direct
+NFZ-MO-6006;4012345000353;Kühlmittel-Ausgleichsbehälter mit Sensor;AFTERMARKET-LINE;Kühlung;68.00;22;EuroTruck Logistics
+NFZ-MO-6007;4012345000360;Keilrippenriemen 8PK2150 EPDM;Continental;Antrieb;22.50;130;Continental Distribution
+NFZ-MO-6008;4012345000377;Riemenspanner automatisch 24V;Gates;Antrieb;54.00;40;Gates Europe
+NFZ-TR-7001;4012345000384;Kupplungssatz 430mm SAC gedämpft;Sachs;Kupplung;620.00;7;ZF Aftermarket AG
+NFZ-TR-7002;4012345000391;Kupplungsnehmerzylinder Konzentrisch;Knorr-Bremse;Kupplung;195.00;18;Bremssysteme Süd
+NFZ-TR-7003;4012345000407;Gelenkwellenmittellager 60mm;GENERIC_HD;Antriebswelle;48.00;35;Global Parts Direct
+NFZ-TR-7004;4012345000414;Kreuzgelenk Zapfen 52x133mm;AFTERMARKET-LINE;Antriebswelle;38.50;50;EuroTruck Logistics
+NFZ-AB-8001;4012345000421;AdBlue Dosiermodul wassergekühlt;Bosch;Abgasreinigung;340.00;11;Bosch Rexroth Partner
+NFZ-AB-8002;4012345000438;Diesel-Partikelfilter (DPF) Euro 6 Keramik;OE-ERSATZ-PRO;Abgasreinigung;1350.00;3;EuroTruck Logistics
+NFZ-AB-8003;4012345000445;Abgasschelle V-Band 120mm Edelstahl;GENERIC_HD;Abgasanlage;14.20;140;Global Parts Direct
+NFZ-BD-9001;4012345000452;Kotflügel Halbschale 650mm PE-HD;GENERIC_HD;Karosserie;26.00;60;Global Parts Direct
+NFZ-BD-9002;4012345000469;Aufstiegsstufe Trittblech Alu geriffelt;AFTERMARKET-LINE;Karosserie;39.00;45;EuroTruck Logistics
+NFZ-BD-9003;4012345000476;Spiegelglas Weitwinkel beheizt 24V;OE-ERSATZ-PRO;Karosserie;31.50;50;EuroTruck Logistics
+NFZ-BD-9004;4012345000483;Gasdruckfeder Frontklappe 450N;Stabilus;Karosserie;18.90;75;Stabilus Sales
+NFZ-BD-9005;4012345000490;Sattelkupplungs-Verschleißringsatz;Jost;Trailer;85.00;30;Jost World
+NFZ-BD-9006;4012345000506;Königsbolzen 2 Zoll DIN 74080;Jost;Trailer;65.00;40;Jost World
