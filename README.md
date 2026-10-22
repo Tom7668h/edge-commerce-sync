@@ -8,16 +8,114 @@
 [![Frontend](https://img.shields.io/badge/Frontend-TailwindCSS%20%2B%20Alpine.js-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+> 🌐 **Sprache / Language:** [🇩🇪 Zur deutschen Version](#-deutsche-dokumentation) | [🇬🇧 Switch to English Version](#-english-documentation)
+
+---
+
+## 🇩🇪 Deutsche Dokumentation
+
+Ein extrem latenzarmer, **Edge-First Katalog- & Dynamic-Pricing-Hub** für den B2B-Großhandel und Aftermarket im Nutzfahrzeug- (NFZ) und Industriebereich. Entwickelt mit **Cloudflare Workers Edge Runtime**, **Hono**, **Cloudflare D1 / SQLite**, **Tailwind CSS** und **Alpine.js**.
+
+---
+
+### 🎯 Problemstellung & Business Value
+
+#### Der Flaschenhals im klassischen E-Commerce
+Im Großhandel und bei Ersatzteildistributoren liefern Zulieferer täglich umfangreiche Katalog-Feeds mit zehntausenden SKUs in unterschiedlichsten CSV- und JSON-Formaten. Monolithische ERP- und Shop-Backends (Shopware, Magento, SAP) stoßen bei nächtlichen Batch-Imports regelmäßig an ihre Grenzen: Tabellensperren, Latenzspitzen und Timeouts im Checkout führen zu direkten Umsatzverlusten.
+
+#### Die Edge-First Lösung
+Dieser Hub verlagert die gesamte Katalogverarbeitung direkt an die globale Network Edge:
+1. **Latenzfreie Feed-Aufnahme:** Validiert eingehende Feeds in Sub-Millisekunden-Worker-Invocations inklusive EAN-13 GS1 Modulo-10 Prüfziffernberechnung.
+2. **Automatisches Brand-Mapping:** Regex-basierte Regelübersetzung transformiert generische Lieferanten-Brands (`GENERIC_HD`, `AFTERMARKET_LINE`) in margenstarke Eigenmarken (`ApexTruck Pro`, `OmniCraft Fleet`).
+3. **Dynamische 4-Stufen Pricing-Engine:** Margen werden dynamisch auf Basis von Einkaufspreis-Staffeln, Kategorie-Handlingsaufschlägen und psychologischen Rundungsregeln (`*.99 €`) kalkuliert.
+4. **Audit-Trail & Preissprung-Erkennung:** Preissprünge $\ge 15\%$ werden automatisch markiert und revisionssicher protokolliert, um Margenerosion zu verhindern.
+5. **Interaktives Edge-Dashboard:** Reaktives Dark-Mode Web-Interface mit 1-Klick Feed-Simulator (50 NFZ-Artikel) und Live-KPI-Metriken.
+
+---
+
+### 🏗️ Architektur-Ablauf
+
+```mermaid
+flowchart TD
+    Supplier["Lieferanten-Kataloge (CSV / JSON)"] --> Ingestion["Zero-Latency Ingest Endpoint (/api/ingest)"]
+    Ingestion --> Validator["EAN-13 & Schema Validierung"]
+    Validator --> BrandEngine["Brand-Mapping Regex Engine"]
+    BrandEngine --> PriceEngine["4-Stufen Margen- & Rundungs-Engine"]
+    PriceEngine --> AnomalyCheck{"Preis-Delta >= 15%?"}
+    AnomalyCheck -->|Ja| AuditLog[("Audit Log für Preisanomalien")]
+    AnomalyCheck -->|Nein / Protokolliert| D1Database[("Cloudflare D1 / SQLite DB")]
+    D1Database --> EdgeAPI["Hono REST API (/api/catalog)"]
+    EdgeAPI --> Dashboard["Glassmorphism Web Dashboard"]
+```
+
+---
+
+### 📊 Dynamisches Margenmodell
+
+| Einkaufspreis-Staffel (€) | Basis-Marge (%) | Handling-Aufschlag (€) | Rundung | Anwendungsbereich |
+| :--- | :--- | :--- | :--- | :--- |
+| **0,00 € – 19,99 €** | `55.0 %` | `+ 2,50 €` | Psychologisch (`*.99 €`) | Kleinmaterial, O-Ringe, Dichtungen |
+| **20,00 € – 99,99 €** | `35.0 %` | `+ 4,00 €` | Psychologisch (`*.99 €`) | Filter, Bremsbeläge, Ventile |
+| **100,00 € – 499,99 €** | `22.0 %` | `+ 8,00 €` | Psychologisch (`*.99 €`) | Bremsscheiben, Sensoren, Anlasser |
+| **500,00 € +** | `15.0 %` | `+ 15,00 €` | Psychologisch (`*.99 €`) | Retarder, Kompressoren, Getriebe |
+
+---
+
+### 🚀 Schnellstart
+
+#### Voraussetzungen
+- Node.js 20+ (LTS)
+
+#### Installation & Start
+```powershell
+# 1. Klonen & Abhängigkeiten installieren
+git clone https://github.com/Tom7668h/edge-commerce-sync.git
+cd edge-commerce-sync
+npm install
+
+# 2. Lokalen Server starten (Dashboard auf Port 8787)
+npm start
+
+# 3. Tests ausführen
+npm test
+```
+
+Dashboard im Browser: 👉 **http://localhost:8787**
+
+---
+
+### 🧪 Tests
+```powershell
+npm test
+```
+```text
+ ✓ tests/unit/pricing.service.test.ts   (8 tests)
+ ✓ tests/unit/brand-mapping.test.ts     (6 tests)
+ ✓ tests/unit/validator.test.ts         (6 tests)
+ ✓ tests/integration/catalog-api.test.ts(6 tests)
+
+ Test Files  4 passed (4)
+      Tests  26 passed (26)
+```
+
+---
+
+<br><br>
+
+---
+
+## 🇬🇧 English Documentation
+
 An ultra-low-latency, edge-first **Catalog Ingestion & Dynamic Price Intelligence Hub** engineered for enterprise automotive (commercial vehicle / NFZ) and industrial wholesale. Built with **Cloudflare Workers**, **Hono**, **Cloudflare D1 / SQLite**, **Tailwind CSS**, and **Alpine.js**.
 
 ---
 
-## 🎯 The Business Challenge & Edge Solution
+### 🎯 The Business Challenge & Edge Solution
 
-### The Bottleneck in Monolithic E-Commerce
+#### The Bottleneck in Monolithic E-Commerce
 In B2B wholesale and automotive aftermarket distribution, suppliers deliver daily catalog price feeds containing tens of thousands of SKUs in heterogeneous CSV and JSON formats. Monolithic ERP and shop backends (Shopware, Magento, SAP) typically choke on nocturnal batch imports, holding table locks, causing latency spikes, and causing checkout timeouts.
 
-### The Edge Solution
+#### The Edge Solution
 This hub offloads catalog processing directly to the global network edge:
 1. **Zero-Latency Feed Ingestion:** Streams and validates incoming feeds in sub-millisecond worker invocations with EAN-13 GS1 Modulo-10 checksum validation.
 2. **Automated Brand Mapping:** Rule-based regex translation converts generic supplier names (`GENERIC_HD`, `AFTERMARKET_LINE`) into high-margin private labels (`ApexTruck Pro`, `OmniCraft Fleet`).
@@ -27,104 +125,17 @@ This hub offloads catalog processing directly to the global network edge:
 
 ---
 
-## 🏗️ System Architecture
+### 🚀 Quickstart
 
-```mermaid
-flowchart TD
-    Supplier["Supplier Catalogs (CSV / JSON)"] --> Ingestion["Zero-Latency Ingest Endpoint (/api/ingest)"]
-    Ingestion --> Validator["EAN-13 & Schema Validator"]
-    Validator --> BrandEngine["Brand Mapping Regex Engine"]
-    BrandEngine --> PriceEngine["4-Tier Margin & Rounding Engine"]
-    PriceEngine --> AnomalyCheck{"Price Delta >= 15%?"}
-    AnomalyCheck -->|Yes| AuditLog[("Price Audit Log")]
-    AnomalyCheck -->|No / Logged| D1Database[("Cloudflare D1 / SQLite DB")]
-    D1Database --> EdgeAPI["Hono REST API (/api/catalog)"]
-    EdgeAPI --> Dashboard["Glassmorphism Web Dashboard"]
-```
-
----
-
-## 📊 Dynamic Pricing & Margin Model
-
-| Purchase Price Tier (€) | Base Margin (%) | Handling Fee (€) | Rounding Mode | Target Use Case |
-| :--- | :--- | :--- | :--- | :--- |
-| **0,00 € – 19,99 €** | `55.0 %` | `+ 2,50 €` | Psychological (`*.99 €`) | Consumables, O-Rings, Fasteners |
-| **20,00 € – 99,99 €** | `35.0 %` | `+ 4,00 €` | Psychological (`*.99 €`) | Filters, Valves, Brake Pads |
-| **100,00 € – 499,99 €** | `22.0 %` | `+ 8,00 €` | Psychological (`*.99 €`) | Brake Discs, Sensors, Starters |
-| **500,00 € +** | `15.0 %` | `+ 15,00 €` | Psychological (`*.99 €`) | Retarders, Compressors, Engines |
-
----
-
-## 🚀 Quickstart & Local Execution
-
-### Prerequisites
-- Node.js 18+ (tested on Node.js 22 LTS)
-- npm
-
-### 1. Installation
 ```bash
 git clone https://github.com/Tom7668h/edge-commerce-sync.git
 cd edge-commerce-sync
 npm install
-```
-
-### 2. Run Test Suite (Vitest)
-```bash
-npm test
-```
-Runs 26 unit and integration tests covering parser resilience, GS1 Modulo-10 checksum validation, brand mapping regex, and REST endpoints.
-
-### 3. Build & Start the Web Service
-```bash
-# Type check and build
-npm run build
-
-# Start local server with web interface
 npm start
 ```
-Open **[http://localhost:8787](http://localhost:8787)** in your browser to access the dashboard.
+Open **http://localhost:8787**
 
 ---
 
-## 🌐 Web Dashboard Features
-
-- **Live KPI Telemetry:** Instant calculation of total catalog SKUs, physical stock units, total inventory value (EK / VK), and average margin percentage.
-- **1-Click Feed Simulator:** Ingests 50 real-world commercial vehicle parts (MAN, Scania, Mercedes-Benz Actros, Volvo FH) with intentional price fluctuations to showcase real-time anomaly detection.
-- **Brand Mapping Visualizer:** Displays original supplier brand vs. normalized internal brand with color-coded badges.
-- **Audit Drawer:** Inspects all historical price variations with delta percentages, old/new prices, and audit reasons.
-- **Architecture & Info Modal:** Integrated modal explaining the design decisions and edge engineering trade-offs.
-
----
-
-## 🔌 REST API Specification
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/health` | Runtime healthcheck and environment status |
-| `GET` | `/api/catalog` | Paginated catalog listing with search & category filters |
-| `GET` | `/api/catalog/:sku` | Detailed article view with price history |
-| `GET` | `/api/catalog/categories` | List distinct catalog categories |
-| `GET` | `/api/catalog/brands` | List all resolved brands |
-| `GET` | `/api/stats/summary` | Aggregated catalog KPIs and anomaly counts |
-| `GET` | `/api/audit/logs` | Immutable price variation logs ($\ge 15\%$) |
-| `POST` | `/api/ingest/simulate` | Simulates ingestion of 50-item NFZ feed |
-| `POST` | `/api/ingest/csv` | Ingests multipart or raw CSV payload |
-
----
-
-## ☁️ Cloudflare Workers Deployment
-
-This repository is natively architected for **Cloudflare Workers** with **Cloudflare D1**:
-
-```bash
-# Deploy to Cloudflare Edge Network
-npx wrangler deploy
-
-# Execute D1 Schema Migrations in Cloudflare
-npx wrangler d1 execute catalog-db --file=schema.sql
-```
-
----
-
-## 📄 License
-MIT License. Created by [Tom7668h](https://github.com/Tom7668h).
+### 📄 License
+MIT © Tom7668h
